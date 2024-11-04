@@ -1,14 +1,9 @@
-const { signupValidation } = require("../Middlewares/AuthValidation");
-const { signup } = require("../controllers/AuthController"); // No need for `.default`
+const { signup, login } = require('../Controllers/AuthController');
+const { signupValidation, loginValidation } = require('../Middlewares/AuthValidation');
 
-const router = require("express").Router(); // Invoke the Router method
+const router = require('express').Router();
 
-// Route for login
-router.post("/login", (req, res) => {
-  res.send("login success");
-});
+router.post('/login', loginValidation, login);
+router.post('/signup', signupValidation, signup);
 
-// Route for signup
-router.post("/signup", signupValidation, signup); // Apply validation middleware before calling signup
-
-module.exports = router; // Export the router for use in other files
+module.exports = router;
